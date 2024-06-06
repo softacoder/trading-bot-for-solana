@@ -81,8 +81,17 @@ const run = async () => {
   file.on("close", () => {
     fs.appendFileSync("pnl.csv", "date, pnl\n");
     pnl.forEach((data) => {
-      fs.appendFileSync("pnl.csv", `${data[0]}`);
+      fs.appendFileSync(
+        "pnl.csv",
+        `${data[0].toString()}, ${data[1].toString()}\n`
+      );
     });
+    console.log(
+      `Pnl long position: ${((lastPrice / firstPrice - 1) * 100).toFixed(2)}%`
+    );
+    console.log(
+      `Pnl trading bot: ${(pnl[pnl.length - 1][1] * 100).toFixed(2)}%`
+    );
   });
 };
 
